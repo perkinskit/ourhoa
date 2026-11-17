@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fossil Lake Ranch Governing Documents</title>
+<meta name="description" content="Searchable covenants, bylaws, design guidelines and policies of Fossil Lake Homeowners Association, with a link for every rule.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a law-library reading room. Fixed contents rail on the left, one measured
+   reading column on the right, search and the complaint tool always one click away. */
+:root{
+  --paper:#f3f5f3; --surface:#ffffff; --ink:#1b2321; --muted:#5a6663; --line:#d5dbd7;
+  --accent:#3b5c47;            /* Fossil Lake Green, the community's fence stain */
+  --accent-ink:#ffffff; --accent-soft:#e3ece5;
+  --mark:#f6df8c; --note:#fbf3d9; --note-line:#d9c377; --warn:#9a3b21; --warn-soft:#fbe9e3;
+  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --read:"Newsreader", Georgia, serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141a18; --surface:#1c2421; --ink:#e7ece9; --muted:#9daaa5; --line:#33403b;
+    --accent:#8fc0a0; --accent-ink:#0f1512; --accent-soft:#24332b;
+    --mark:#6b5a17; --note:#2d2a19; --note-line:#6b5f2a; --warn:#f0a48c; --warn-soft:#3a2219;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141a18; --surface:#1c2421; --ink:#e7ece9; --muted:#9daaa5; --line:#33403b;
+  --accent:#8fc0a0; --accent-ink:#0f1512; --accent-soft:#24332b;
+  --mark:#6b5a17; --note:#2d2a19; --note-line:#6b5f2a; --warn:#f0a48c; --warn-soft:#3a2219;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 var(--body);}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.app{display:grid;grid-template-rows:auto 1fr;height:100%}
+/* ---- top bar */
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-direction:column;gap:1px;text-decoration:none;color:var(--ink);margin-right:auto;min-width:0}
+.brand b{font:600 19px/1.15 var(--display);letter-spacing:.01em}
+.status{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.status.official{color:var(--accent);font-weight:600}
+.search{position:relative;flex:1 1 260px;max-width:440px}
+.search input{width:100%;padding:8px 34px 8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+.search button{position:absolute;right:4px;top:4px;bottom:4px;width:26px;border:0;background:none;color:var(--muted);cursor:pointer;font-size:16px;display:none}
+.search.has button{display:block}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:500;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.small{padding:4px 9px;font-size:12.5px}
+/* ---- body */
+.body{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:0}
+.rail{border-right:1px solid var(--line);overflow:auto;padding:16px 12px 40px 20px;background:var(--surface)}
+.main{overflow:auto;padding:28px 28px 80px}
+.col{max-width:760px;margin:0 auto}
+.rail h2{font:600 11.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+.rail h2:first-child{margin-top:0}
+.rail ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.rail a{display:block;padding:5px 8px;border-radius:5px;color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.35}
+.rail a:hover{background:var(--accent-soft)}
+.rail a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.rail .toc a{font-size:13px;padding:3px 8px 3px 10px;color:var(--muted)}
+.rail .toc a .n{display:inline-block;min-width:2.6em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.rail .toc .g{font-weight:600;color:var(--ink);font-size:12.5px;padding:8px 8px 2px;margin-top:4px}
+.railtoggle{display:none}
+/* ---- reading */
+h1{font:600 30px/1.15 var(--display);margin:0 0 6px;text-wrap:balance}
+.meta{color:var(--muted);font-size:13.5px;margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 22px}
+.chip{font-size:12px;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.chip.scan{border-color:var(--note-line);background:var(--note);color:var(--ink)}
+.grp{font:600 12.5px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:38px 0 4px;padding-top:16px;border-top:2px solid var(--accent)}
+.grp span{display:block;font:600 22px/1.2 var(--display);letter-spacing:0;text-transform:none;color:var(--ink);margin-top:4px;text-wrap:balance}
+.sec{padding:16px 16px 10px;margin:14px -16px 0;border-radius:8px;scroll-margin-top:12px}
+.sec.hit{background:var(--accent-soft)}
+.sec h3{font:600 18.5px/1.25 var(--display);margin:0 0 6px;text-wrap:balance}
+.sec h3 .n{color:var(--accent);margin-right:.45em;font-variant-numeric:tabular-nums}
+.tools{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.tools button,.tools a{border:0;background:none;padding:0;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-size:12.5px}
+.sec p,.sec li,.sec td,.sec th{font:400 17px/1.55 var(--read)}
+.sec p{margin:0 0 10px;max-width:68ch}
+.sec .li{display:grid;grid-template-columns:2.6em minmax(0,1fr);gap:0 4px;margin:0 0 8px;max-width:70ch;scroll-margin-top:12px;border-radius:5px}
+.sec .li.hit{background:var(--mark)}
+.sec .li > span{font:400 17px/1.55 var(--read);color:var(--muted);font-variant-numeric:tabular-nums}
+.sec .li > div{font:400 17px/1.55 var(--read)}
+.l1{margin-left:0}.l2{margin-left:2.2em}.l3{margin-left:4.4em}.l4{margin-left:6.6em}
+.sub{font:600 13px/1.3 var(--body);letter-spacing:.05em;text-transform:uppercase;margin:16px 0 6px;color:var(--muted)}
+.note{background:var(--note);border-left:3px solid var(--note-line);padding:8px 12px;border-radius:0 6px 6px 0;margin:6px 0 12px;font-size:13.5px;max-width:70ch}
+.sup{border:1px dashed var(--line);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--muted)}
+.sup b{font:600 12px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.sup p{font-size:15.5px;margin:0}
+.tw{overflow-x:auto;margin:8px 0 14px}
+table{border-collapse:collapse;min-width:420px}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top;white-space:pre-line}
+.sec th{font:600 13px/1.3 var(--body);background:var(--accent-soft)}
+td{font-variant-numeric:tabular-nums}
+.row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;padding:5px 0;border-bottom:1px solid var(--line);max-width:70ch;font:400 16px/1.45 var(--read)}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
+/* ---- home */
+.lede{font:400 18px/1.5 var(--read);max-width:62ch;margin:8px 0 14px}
+.disc{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px 16px;margin:16px 0 24px;font-size:14px;max-width:70ch}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 26px}
+.topics button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 12px;cursor:pointer;font-size:13.5px}
+.topics button:hover{border-color:var(--accent);color:var(--accent)}
+.kind{font:600 11.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.doc{display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink)}
+.doc:hover{border-color:var(--accent)}
+.doc b{font:600 17px/1.2 var(--display)}
+.doc small{color:var(--muted);font-size:12.5px;line-height:1.35}
+.col.wide{max-width:900px}
+.bigsearch input{width:100%;padding:15px 18px;font-size:18px;border:2px solid var(--accent);border-radius:10px;background:var(--surface);color:var(--ink)}
+.bigsearch{margin:18px 0 10px}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:8px 0 12px}
+.fcard{display:flex;flex-direction:column;gap:8px;padding:18px 18px 16px;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:10px}
+.fcard.go{background:var(--accent-soft);border-color:var(--accent)}
+.eyebrow{font:600 11.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ftitle{font:600 23px/1.15 var(--display);color:var(--ink);text-decoration:none;text-wrap:balance}
+a.ftitle:hover{color:var(--accent)}
+.fcard p{margin:0;color:var(--muted);font-size:14px}
+.fcard ul{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:5px;font-size:14.5px}
+.fcard .btn{align-self:flex-start;margin-top:auto}
+.below{display:flex;align-items:center;gap:12px;margin:64px 0 4px;color:var(--muted);font:600 11.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase}
+.below::after{content:"";flex:1;height:1px;background:var(--line)}
+/* ---- search results */
+.res{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.r{display:block;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink)}
+.r:hover{border-color:var(--accent)}
+.r .w{font-size:12px;color:var(--muted);letter-spacing:.03em}
+.r b{font:600 16.5px/1.25 var(--display);display:block;margin:1px 0 3px}
+.r p{margin:0;font:400 15px/1.45 var(--read);color:var(--muted)}
+/* ---- complaint */
+.cgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;max-width:1180px;margin:0 auto}
+.form{display:flex;flex-direction:column;gap:14px}
+.form fieldset{border:1px solid var(--line);border-radius:8px;padding:12px 14px 14px;margin:0;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.form legend{font:600 12px/1 var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--accent);padding:0 6px}
+.form label{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--muted)}
+.form input[type=text],.form input[type=date],.form input[type=email],.form textarea{padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);width:100%}
+.form textarea{min-height:96px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{flex-direction:row !important;align-items:flex-start;gap:8px !important;color:var(--ink) !important;font-size:14px !important}
+.picked{display:flex;flex-direction:column;gap:6px}
+.pk{display:flex;gap:8px;align-items:flex-start;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);font-size:13.5px}
+.pk span{flex:1}
+.pk button{border:0;background:none;color:var(--warn);cursor:pointer}
+.sugg{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:6px;max-height:230px;overflow:auto;background:var(--paper)}
+.sugg[hidden]{display:none}
+.sugg button{text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:6px 10px;cursor:pointer;font-size:13.5px}
+.sugg button:hover{background:var(--accent-soft)}
+.sugg small{color:var(--muted)}
+.letter{position:sticky;top:0;display:flex;flex-direction:column;gap:10px;align-self:start}
+.letter pre{white-space:pre-wrap;word-wrap:break-word;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:0;font:400 15.5px/1.55 var(--read);max-height:70vh;overflow:auto}
+.need{background:var(--warn-soft);color:var(--warn);border-radius:6px;padding:8px 12px;font-size:13.5px}
+.need ul{margin:4px 0 0;padding-left:18px}
+.ok{color:var(--accent);font-size:13.5px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toast{font-size:13px;color:var(--accent)}
+.empty{color:var(--muted);padding:40px 0}
+@media (max-width: 860px){
+  .body{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr}
+  .rail{border-right:0;border-bottom:1px solid var(--line);padding:8px 16px;max-height:46vh}
+  .rail .inner{display:none}.rail.open .inner{display:block;padding-top:8px}
+  .railtoggle{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:6px;background:var(--paper);padding:7px 10px;cursor:pointer}
+  .main{padding:20px 16px 70px}
+  .sec{margin-left:-8px;margin-right:-8px;padding:12px 8px 8px}
+  .cgrid{grid-template-columns:minmax(0,1fr)}.letter{position:static}
+  .l2{margin-left:1.2em}.l3{margin-left:2.4em}.l4{margin-left:3.6em}
+  h1{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="bar">
+    <a class="brand" href="#" id="brand"><b id="siteName"></b><span class="status" id="siteStatus"></span></a>
+    <div class="search" id="searchBox">
+      <input id="q" type="search" placeholder="Search every document: parking, fences, trash…" autocomplete="off" aria-label="Search the governing documents">
+      <button id="qclear" type="button" aria-label="Clear search">×</button>
+    </div>
+    <a class="btn" href="#complaint" id="complaintBtn">Write a complaint</a>
+  </header>
+  <div class="body">
+    <nav class="rail" id="rail" aria-label="Contents">
+      <button class="railtoggle" id="railToggle" type="button">Contents ▾</button>
+      <div class="inner" id="railInner"></div>
+    </nav>
+    <main class="main" id="main"><div class="col"><p class="empty">Loading the documents…</p></div></main>
+  </div>
+</div>
+<script>
+/* ============================================================================
+   SITE SETTINGS. Everything that changes if this becomes the Association's
+   official site is here. Flip `official` to true and fill in the recipient.
+   ========================================================================== */
+const SITE = {
+  official: false,
+  name: "Fossil Lake Ranch Governing Documents",
+  association: "Fossil Lake Homeowners Association, Inc.",
+  statusUnofficial: "Unofficial resident reference",
+  statusOfficial: "Official Association reference",
+  disclaimerUnofficial: "This is an unofficial reference prepared by residents. It is not published by the Association or its management company. The recorded and adopted documents control. Several documents here were transcribed from scans, so check the source PDF page noted on each section before relying on exact wording.",
+  disclaimerOfficial: "This reference is published by the Association for convenience. The recorded and adopted documents control. Several documents here were transcribed from scans, so check the source PDF page noted on each section before relying on exact wording.",
+  publicUrl: "",            // full address of this site; used for "Copy link" and links inside complaint letters
+  pdfBase: "pdf/",             // folder holding the source PDFs (e.g. "pdf/"); leave empty to show page numbers as text
+  complaint: {
+    recipientName: "Board of Directors",
+    recipientOrg: "Fossil Lake Homeowners Association, Inc.",
+    recipientAddress: "",   // mailing address or "c/o" management company
+    recipientEmail: "",     // where written complaints are sent
+    policyDoc: "enforcement", policySection: "2"
+  }
+};
+/* ========================================================================== */
+const $ = (s, r=document) => r.querySelector(s);
+const el = (t, a={}, ...kids) => { const e=document.createElement(t); for(const k in a){ if(k==="class") e.className=a[k]; else if(k==="text") e.textContent=a[k]; else if(k.startsWith("on")) e.addEventListener(k.slice(2),a[k]); else e.setAttribute(k,a[k]); } for(const c of kids){ if(c!=null) e.append(c); } return e; };
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+let DOCS=[], INDEX=[], BYID={}, picked=[], lastQuery="";
+const KINDS=[["Declaration","Covenants"],["Bylaws","Bylaws and Articles"],["Articles","Bylaws and Articles"],["Guidelines","Design guidelines"],["Policy","Policies"],["How-to","How-to guides"]];
+const SYN={rv:["recreational vehicle","camper","motor home","motorhome","trailer"],rvs:["recreational vehicle","camper","motor home"],camper:["recreational vehicle","campers"],boat:["boats"],
+ trash:["garbage","refuse","rubbish","trash"],garbage:["trash","refuse"],airbnb:["short term","vrbo","rental"],vrbo:["short term","airbnb"],rental:["leasing","lease","rent"],rent:["leasing","lease","rental"],renting:["leasing","lease"],
+ dog:["pet","dogs","dog run"],dogs:["pet","dog"],cat:["pet"],pets:["pet"],animal:["pet","animals"],poop:["feces"],barking:["nuisance","pet"],noise:["sound","nuisance","noise"],loud:["sound","nuisance"],
+ shed:["outbuilding","accessory building","storage shed"],sheds:["outbuilding","accessory building"],weeds:["weed","landscaping"],lawn:["landscaping","turf","lawns"],grass:["turf","landscaping","lawns"],yard:["landscaping","lot"],
+ paint:["painting","color"],color:["paint","colour"],car:["vehicle","automobile"],cars:["vehicles","automobiles"],truck:["vehicle","trucks","commercial"],parking:["parked","vehicle","parking"],
+ satellite:["antenna","dish"],dish:["antenna","satellite"],lights:["lighting","light"],christmas:["holiday"],fine:["fines"],fines:["fine"],hoa:["association"],board:["directors"],dues:["assessment","assessments"],fees:["assessment","fee"],
+ smoking:["smoke","vape"],weed:["marijuana","weeds"],pot:["marijuana"],chickens:["chicken"],solar:["solar"],fence:["fences","fencing"],fences:["fence","fencing"],sign:["signs"],signs:["sign"],tree:["trees"],trees:["tree"],
+ pool:["pools","swimming"],trampoline:["trampolines"],basketball:["backboard"],hoop:["basketball","backboard"],firepit:["fire pit"],business:["home business","business activity"],meeting:["meetings"],vote:["voting","votes"],quorum:["quorum"],xeriscape:["xeriscaping","xeric"],roof:["roofs","roofing"]};
+const TOPICS=["parking","RV","trash","fences","pets","signs","rentals","paint","landscaping","noise","sheds","solar","chickens","fines"];
+
+const secId = (d,s) => d.id+"-"+slug(s.num||s.id);
+const liId  = (d,s,b) => secId(d,s)+"-"+slug(b.a);
+const linkId = l => { const [d,r]=l.split("/"); return d+"-"+slug(r); };
+function cite(d,s,b){ const what = s.num ? (/^(Appendix|[IVX]+$)/.test(s.num)? (/^Appendix/.test(s.num)?s.num:"Part "+s.num) : (d.kind==="Policy"?"Paragraph ":"Section ")+s.num) + (b? "("+b.a.replace(/[().]/g,"")+")":"") : s.title; return d.cite+", "+what+(s.num&&s.title?" ("+s.title+")":""); }
+function textOf(s){ return s.blocks.map(b=> b.k==="table"? b.rows.map(r=>r.join(" ")).join(" ") : b.k==="row"? b.c.join(" ") : (b.m&&b.m!=="•"?b.m+" ":"")+(b.x||"")).join(" "); }
+
+async function boot(){
+  $("#siteName").textContent=SITE.name;
+  const st=$("#siteStatus"); st.textContent=SITE.official?SITE.statusOfficial:SITE.statusUnofficial; st.classList.toggle("official",SITE.official);
+  try{ const r=await fetch("data.json"); DOCS=await r.json(); }
+  catch(e){ $("#main").innerHTML='<div class="col"><p class="empty">The documents could not be loaded. Reload the page to try again.</p></div>'; return; }
+  for(const d of DOCS){ for(const g of d.groups){ for(const s of g.sections){ const id=secId(d,s); const rec={d,g,s,id,title:(s.num?s.num+" ":"")+s.title,text:textOf(s)}; rec.low=(rec.title+" "+rec.text).toLowerCase(); rec.tlow=rec.title.toLowerCase(); INDEX.push(rec); BYID[id]=rec; } } }
+  window.addEventListener("hashchange",route);
+  $("#q").addEventListener("input",e=>{ lastQuery=e.target.value.trim(); $("#searchBox").classList.toggle("has",!!lastQuery); if(lastQuery) showSearch(); else route(); });
+  $("#qclear").addEventListener("click",()=>{ $("#q").value=""; lastQuery=""; $("#searchBox").classList.remove("has"); route(); $("#q").focus(); });
+  $("#railToggle").addEventListener("click",()=>$("#rail").classList.toggle("open"));
+  $("#brand").addEventListener("click",()=>{ $("#q").value=""; lastQuery=""; $("#searchBox").classList.remove("has"); if(!location.hash) route(); });
+  route();
+}
+function route(){
+  const h=decodeURIComponent(location.hash.replace(/^#/,""));
+  if(lastQuery && !h.startsWith("x-")){ /* a navigation clears the search view */ }
+  $("#rail").classList.remove("open");
+  if(!h){ home(); return; }
+  if(h==="complaint"){ complaint(); return; }
+  let rec=BYID[h], sub=null;
+  if(!rec){ const m=h.match(/^(.*)-([a-z0-9]+)$/); if(m && BYID[m[1]]){ rec=BYID[m[1]]; sub=h; } }
+  const doc = rec? rec.d : DOCS.find(d=>d.id===h);
+  if(!doc){ home(); return; }
+  showDoc(doc, rec? rec.id:null, sub);
+}
+/* ---------------------------------------------------------------- rail */
+function rail(doc){
+  const box=$("#railInner"); box.textContent="";
+  box.append(el("h2",{text:"Start here"}));
+  const item=d=>el("li",{},el("a",{href:"#"+d.id,class:doc&&doc.id===d.id?"on":"",text:d.short}));
+  const top=el("ul"); for(const d of DOCS.filter(d=>d.kind==="Declaration")) top.append(item(d)); top.append(el("li",{},el("a",{href:"#complaint",text:"Write a complaint"}))); box.append(top);
+  box.append(el("h2",{text:"How-to guides"})); const hw=el("ul"); for(const d of DOCS.filter(d=>d.kind==="How-to")) hw.append(item(d)); box.append(hw);
+  box.append(el("h2",{text:"Other documents"})); const ul=el("ul"); for(const d of DOCS.filter(d=>d.kind!=="Declaration"&&d.kind!=="How-to")) ul.append(item(d)); box.append(ul);
+  if(doc){
+    box.append(el("h2",{text:"In this document"}));
+    const t=el("ul",{class:"toc"});
+    for(const g of doc.groups){ if(g.label||g.title) t.append(el("li",{class:"g",text:[g.label,g.title].filter(Boolean).join(" · ")}));
+      for(const s of g.sections){ const a=el("a",{href:"#"+secId(doc,s)}); if(s.num) a.append(el("span",{class:"n",text:s.num.replace(/^Appendix /,"App. ")})); a.append(s.title); t.append(el("li",{},a)); } }
+    box.append(t);
+  }
+}
+/* ---------------------------------------------------------------- home */
+function runSearch(t){ const q=$("#q"); q.value=t; lastQuery=t.trim(); $("#searchBox").classList.toggle("has",!!lastQuery); if(lastQuery){ showSearch(); q.focus(); } }
+function home(){
+  rail(null); const m=$("#main"); m.textContent=""; const c=el("div",{class:"col wide"}); m.append(c);
+  c.append(el("h1",{text:SITE.name}));
+  c.append(el("p",{class:"lede",text:"Look up any rule of "+SITE.association+", link straight to it, and write a complaint that cites it."}));
+  const big=el("input",{id:"bigq",type:"search",placeholder:"Search the rules: parking, fences, trash, paint…",autocomplete:"off","aria-label":"Search the governing documents"});
+  big.addEventListener("input",()=>{ if(big.value.trim()) runSearch(big.value); });
+  c.append(el("div",{class:"bigsearch"},big));
+  const tp=el("div",{class:"topics"}); for(const t of TOPICS){ tp.append(el("button",{type:"button",text:t,onclick:()=>runSearch(t)})); } c.append(tp);
+  const cov=DOCS.find(d=>d.kind==="Declaration"), howto=DOCS.filter(d=>d.kind==="How-to");
+  const feat=el("div",{class:"feat"});
+  if(cov){ const n=cov.groups.reduce((a,x)=>a+x.sections.length,0);
+    const links=el("ul"); for(const [id,label] of [["covenants-5-1","Use restrictions (Article 5)"],["covenants-6-1","Architectural review (Article 6)"],["covenants-4-1","Assessments (Article 4)"],["covenants-8-1","Compliance and enforcement (8.1)"]]){ if(BYID[id]) links.append(el("li",{},el("a",{href:"#"+id,text:label}))); }
+    feat.append(el("div",{class:"fcard"},el("span",{class:"eyebrow",text:"The CC&Rs"}),el("a",{class:"ftitle",href:"#"+cov.id,text:"Covenants, Conditions and Restrictions"}),el("p",{text:"The recorded Declaration, "+n+" sections in 8 articles. "+cov.meta.split(" · ")[0]+"."}),links)); }
+  feat.append(el("div",{class:"fcard go"},el("span",{class:"eyebrow",text:"Report a violation"}),el("a",{class:"ftitle",href:"#complaint",text:"Write a complaint"}),el("p",{text:"Builds the written complaint the Enforcement Policy requires, citing the exact provisions. Nothing you type is saved or sent by this site."}),el("a",{class:"btn",href:"#complaint",text:"Start a complaint"})));
+  if(howto.length){ const links=el("ul"); for(const d of howto) links.append(el("li",{},el("a",{href:"#"+d.id,text:d.short})));
+    feat.append(el("div",{class:"fcard"},el("span",{class:"eyebrow",text:"How-to guides"}),el("span",{class:"ftitle",text:"Requests through the resident portal"}),el("p",{text:"Step-by-step instructions for the things residents file most often."}),links)); }
+  c.append(feat);
+  c.append(el("div",{class:"below"},el("span",{text:"All other documents"})));
+  const seen=new Set();
+  for(const [k,label] of KINDS){ if(seen.has(label)||k==="Declaration"||k==="How-to") continue; seen.add(label);
+    const ds=DOCS.filter(d=>KINDS.find(x=>x[0]===d.kind)[1]===label); if(!ds.length) continue;
+    c.append(el("div",{class:"kind",text:label}));
+    const g=el("div",{class:"docs"}); for(const d of ds){ const n=d.groups.reduce((a,x)=>a+x.sections.length,0); g.append(el("a",{class:"doc",href:"#"+d.id},el("b",{text:d.short}),el("small",{text:d.meta}),el("small",{text:n+(n===1?" section":" sections")}))); } c.append(g); }
+  c.append(el("div",{class:"disc",text:SITE.official?SITE.disclaimerOfficial:SITE.disclaimerUnofficial}));
+  m.scrollTop=0;
+}
+/* ---------------------------------------------------------------- document */
+function hl(text, terms){
+  const f=document.createDocumentFragment(); if(!terms||!terms.length){ f.append(text); return f; }
+  const re=new RegExp("("+terms.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")","gi"); let i=0,m;
+  while((m=re.exec(text))){ if(m.index>i) f.append(text.slice(i,m.index)); f.append(el("mark",{text:m[0]})); i=m.index+m[0].length; if(m[0].length===0) re.lastIndex++; }
+  if(i<text.length) f.append(text.slice(i)); return f;
+}
+function renderBlocks(d,s,terms){
+  const out=document.createDocumentFragment(); let rows=null;
+  const flushRows=()=>{ rows=null; };
+  for(const b of s.blocks){
+    if(b.k!=="row") flushRows();
+    if(b.k==="p"){ const p=el("p",{class:b.l?"l"+(b.l+1):""}); p.append(hl(b.x,terms)); out.append(p); }
+    else if(b.k==="li"){ const w=el("div",{class:"li l"+b.l}); if(b.a) w.id=liId(d,s,b); w.append(el("span",{text:b.m}),el("div",{},hl(b.x,terms))); out.append(w); }
+    else if(b.k==="h"){ out.append(el("div",{class:"sub",text:b.x})); }
+    else if(b.k==="note"){ const n=el("div",{class:"note"}); n.append(b.x); if(b.link){ n.append(" ",el("a",{href:"#"+linkId(b.link),text:"Go to it"})); } out.append(n); }
+    else if(b.k==="sup"){ out.append(el("div",{class:"sup"},el("b",{text:"Original text, superseded"}),el("p",{},hl(b.x,terms)))); }
+    else if(b.k==="row"){ const r=el("div",{class:"row"}); for(const c of b.c) r.append(el("div",{},hl(c,terms))); out.append(r); }
+    else if(b.k==="table"){ const t=el("table"); t.append(el("tr",{},...b.head.map(h=>el("th",{text:h})))); for(const r of b.rows) t.append(el("tr",{},...r.map(c=>el("td",{},hl(c,terms))))); out.append(el("div",{class:"tw"},t)); }
+  }
+  return out;
+}
+function showDoc(doc, target, sub){
+  rail(doc); const terms=queryTerms(lastQuery).flat();
+  const m=$("#main"); m.textContent=""; const c=el("div",{class:"col"}); m.append(c);
+  c.append(el("h1",{text:doc.title}), el("p",{class:"meta",text:doc.meta}));
+  const ch=el("div",{class:"chips"}); ch.append(el("span",{class:"chip",text:doc.kind}));
+  if(doc.scan) ch.append(el("span",{class:"chip scan",text:"Transcribed from a scan. Check the PDF page for exact wording."}));
+  ch.append(el("span",{class:"chip",text:"Source file: "+doc.pdf})); c.append(ch);
+  for(const g of doc.groups){
+    if(g.label||g.title){ const h=el("div",{class:"grp",text:g.label}); if(g.title) h.append(el("span",{text:g.title})); c.append(h); }
+    for(const s of g.sections){
+      const id=secId(doc,s); const sec=el("section",{class:"sec",id});
+      const h=el("h3"); if(s.num) h.append(el("span",{class:"n",text:s.num})); h.append(s.title); sec.append(h);
+      const tools=el("div",{class:"tools"});
+      const src=s.pdf||doc.pdf; const pageTxt="PDF page "+s.pg;
+      tools.append(SITE.pdfBase? el("a",{href:SITE.pdfBase+src+"#page="+s.pg,text:pageTxt}) : el("span",{text:pageTxt}));
+      tools.append(el("button",{type:"button",text:"Copy link",onclick:e=>copyLink(id,e.target)}));
+      tools.append(el("button",{type:"button",text:"Cite in a complaint",onclick:e=>{ addPick(id); e.target.textContent="Added to complaint"; }}));
+      sec.append(tools, renderBlocks(doc,s,terms)); c.append(sec);
+    }
+  }
+  const go = sub && document.getElementById(sub) || target && document.getElementById(target);
+  const on=$('#railInner .toc a[href="#'+(target||"")+'"]'); if(on){ on.classList.add("on"); const r=$("#rail"); r.scrollTop=Math.max(0,on.offsetTop-r.clientHeight/3); }
+  if(go){ (target&&document.getElementById(target)||go).classList.add("hit"); if(sub&&document.getElementById(sub)) document.getElementById(sub).classList.add("hit");
+    const jump=()=>{ if(go.isConnected) m.scrollTop += go.getBoundingClientRect().top - m.getBoundingClientRect().top - 8; };
+    jump(); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(jump); }
+  else m.scrollTop=0;
+}
+async function copy(text, btn, done){
+  try{ await navigator.clipboard.writeText(text); const o=btn.textContent; btn.textContent=done||"Copied"; setTimeout(()=>btn.textContent=o,1600); return true; }
+  catch(e){ const o=btn.textContent; btn.textContent="Copy was blocked. Select the text and copy it."; setTimeout(()=>btn.textContent=o,3000); return false; }
+}
+function copyLink(id, btn){
+  if(location.hash!=="#"+id) history.replaceState(null,"","#"+id);
+  const base = SITE.publicUrl || location.href.split("#")[0];
+  copy(base+"#"+id, btn, "Link copied");
+}
+/* ---------------------------------------------------------------- search */
+function queryTerms(q){ return q.toLowerCase().split(/[^a-z0-9.§$%]+/).filter(w=>w.length>1||/\d/.test(w)).map(w=>[w,...(SYN[w]||[])]); }
+function search(q, limit=60){
+  const groups=queryTerms(q); if(!groups.length) return [];
+  const phrase=q.toLowerCase().trim(); const out=[];
+  for(const r of INDEX){ let score=0, ok=true;
+    for(const g of groups){ let best=0; for(let i=0;i<g.length;i++){ const t=g[i]; if(r.low.includes(t)){ let sc=(i===0?3:1.5); if(r.tlow.includes(t)) sc+=(i===0?8:4); const n=r.low.split(t).length-1; sc+=Math.min(n,6)*0.4; best=Math.max(best,sc); } } if(!best){ ok=false; break; } score+=best; }
+    if(!ok) continue; if(groups.length>1 && r.low.includes(phrase)) score+=6; if(r.s.num && r.s.num.toLowerCase()===phrase) score+=30;
+    if(r.d.kind==="Declaration") score+=1.2; else if(r.d.kind==="Guidelines") score+=0.6;
+    out.push({r,score}); }
+  out.sort((a,b)=>b.score-a.score); return out.slice(0,limit).map(x=>x.r);
+}
+function snippet(r, terms){ const low=r.text.toLowerCase(); let at=-1; for(const t of terms){ const i=low.indexOf(t); if(i>=0&&(at<0||i<at)) at=i; } const start=Math.max(0,(at<0?0:at)-70); let s=r.text.slice(start,start+240); if(start>0) s="…"+s.replace(/^\S*\s/,""); if(start+240<r.text.length) s=s.replace(/\s\S*$/,"")+"…"; return s; }
+function showSearch(){
+  rail(null); const m=$("#main"); m.textContent=""; const c=el("div",{class:"col"}); m.append(c);
+  const res=search(lastQuery); const terms=queryTerms(lastQuery).flat();
+  c.append(el("h1",{text:res.length? res.length+(res.length===60?"+":"")+" sections mention “"+lastQuery+"”" : "Nothing found for “"+lastQuery+"”"}));
+  if(!res.length){ c.append(el("p",{class:"lede",text:"Try a different word. The documents often use formal terms: “recreational vehicle” for RV, “refuse” for trash, “outbuilding” for shed. Common ones are matched automatically."})); return; }
+  c.append(el("p",{class:"meta",text:"Related legal terms are included. Open a result to read the section in context."}));
+  const list=el("div",{class:"res"});
+  for(const r of res){ const a=el("a",{class:"r",href:"#"+r.id}); a.append(el("span",{class:"w",text:r.d.short+(r.g.label?" · "+r.g.label:"")}), el("b",{},hl(r.title,terms)), el("p",{},hl(snippet(r,terms),terms)));
+    a.addEventListener("click",()=>{ if(location.hash==="#"+r.id) showDoc(r.d,r.id,null); }); list.append(a); }
+  c.append(list); m.scrollTop=0;
+}
+/* ---------------------------------------------------------------- complaint */
+const F={name:"",addr:"",contact:"",violator:"",where:"",date:"",time:"",observed:false,desc:"",other:"",quote:true,toName:"",toEmail:""};
+function addPick(id){ if(!picked.includes(id)) picked.push(id); }
+function complaint(){
+  rail(null); const m=$("#main"); m.textContent="";
+  const C=SITE.complaint; if(!F.toName) F.toName=C.recipientName; if(!F.toEmail) F.toEmail=C.recipientEmail;
+  const head=el("div",{class:"col",style:"max-width:1180px"});
+  head.append(el("h1",{text:"Write a complaint"}));
+  const pol=BYID[C.policyDoc+"-"+C.policySection];
+  const lede=el("p",{class:"lede"}); lede.append("The Enforcement Policy says a complaint must be in writing, go to the Board of Directors, come from someone who observed the violation, and identify the complainant, the alleged violator if known, what happened, the specific provisions violated, and when it was observed. This form collects exactly that. ");
+  if(pol) lede.append(el("a",{href:"#"+pol.id,text:"Read the policy"}),"."); head.append(lede);
+  head.append(el("div",{class:"disc",text:"Nothing here is saved, uploaded or sent. The letter exists only on this screen until you copy it. A complaint without the required information may not be investigated."}));
+  m.append(head);
+  const grid=el("div",{class:"cgrid"}); m.append(grid);
+  const form=el("form",{class:"form",onsubmit:e=>e.preventDefault()}); grid.append(form);
+  const inp=(id,label,key,type="text",ph="")=>{ const i=el("input",{id,type,placeholder:ph}); i.value=F[key]; i.addEventListener("input",()=>{F[key]=i.value; draw();}); return el("label",{for:id},label,i); };
+  const area=(id,label,key,ph="")=>{ const i=el("textarea",{id,placeholder:ph}); i.value=F[key]; i.addEventListener("input",()=>{F[key]=i.value; draw();}); return el("label",{for:id},label,i); };
+  form.append(el("fieldset",{},el("legend",{text:"You (the complainant)"}), inp("f-name","Your name","name"), inp("f-addr","Your address in the community","addr"), inp("f-contact","Email or phone","contact")));
+  const ob=el("input",{id:"f-observed",type:"checkbox"}); ob.checked=F.observed; ob.addEventListener("change",()=>{F.observed=ob.checked; draw();});
+  form.append(el("fieldset",{},el("legend",{text:"What you observed"}),
+    inp("f-violator","Owner or resident responsible, if known","violator","text","Leave blank if you don't know"),
+    inp("f-where","Address or location of the violation","where"),
+    el("div",{class:"two"}, inp("f-date","Date observed","date","date"), inp("f-time","Time or period (optional)","time","text","e.g. about 7 pm, or ongoing since March")),
+    area("f-desc","Describe what you saw","desc","Stick to facts: what, where, how long."),
+    el("label",{class:"check",for:"f-observed"},ob,"I personally observed this violation.")));
+  const rules=el("fieldset",{},el("legend",{text:"Provisions violated"})); form.append(rules);
+  const pk=el("div",{class:"picked",id:"picked"}); rules.append(pk);
+  const rq=el("input",{id:"f-rule",type:"text",placeholder:"Find a rule: parking, trash cans, fence stain, 5.17…"}); const sg=el("div",{class:"sugg",id:"sugg",hidden:""});
+  rq.addEventListener("input",()=>{ sg.textContent=""; const q=rq.value.trim(); if(!q){ sg.hidden=true; return; } const rs=search(q,12).filter(r=>r.d.kind!=="How-to"&&r.s.num); sg.hidden=!rs.length;
+    for(const r of rs){ sg.append(el("button",{type:"button",onclick:()=>{ addPick(r.id); rq.value=""; sg.hidden=true; drawPicked(); draw(); }},r.title," ",el("small",{text:"· "+r.d.short}))); } });
+  rules.append(el("label",{for:"f-rule"},"Add a provision",rq),sg);
+  const qt=el("input",{id:"f-quote",type:"checkbox"}); qt.checked=F.quote; qt.addEventListener("change",()=>{F.quote=qt.checked; draw();});
+  rules.append(el("label",{class:"check",for:"f-quote"},qt,"Quote the text of each provision in the letter."));
+  form.append(el("fieldset",{},el("legend",{text:"Anything else"}), area("f-other","Other pertinent information (optional)","other","Photos you can provide, earlier conversations, safety concerns.")));
+  form.append(el("fieldset",{},el("legend",{text:"Send to"}), inp("f-to","Addressed to","toName"), inp("f-email","Email address for the Board or manager (optional)","toEmail","email","Fills in the email link below")));
+  const side=el("div",{class:"letter"}); grid.append(side);
+  side.append(el("div",{id:"need"}), el("pre",{id:"letter",tabindex:"0"}));
+  const act=el("div",{class:"actions"});
+  act.append(el("button",{class:"btn",type:"button",text:"Copy letter",onclick:e=>copy($("#letter").textContent,e.target,"Letter copied")}), el("a",{class:"btn ghost",id:"mail",href:"#complaint",text:"Open in email"}), el("span",{class:"toast",id:"mailnote"}));
+  side.append(act);
+  function drawPicked(){ pk.textContent=""; if(!picked.length){ pk.append(el("div",{class:"meta",text:"None yet. Search below, or use “Cite in a complaint” on any section."})); return; }
+    for(const id of picked){ const r=BYID[id]; if(!r) continue; pk.append(el("div",{class:"pk"},el("span",{text:cite(r.d,r.s)}),el("button",{type:"button","aria-label":"Remove "+r.title,text:"Remove",onclick:()=>{ picked=picked.filter(x=>x!==id); drawPicked(); draw(); }}))); } }
+  function draw(){
+    const miss=[]; if(!F.name.trim()) miss.push("your name"); if(!F.desc.trim()) miss.push("a description of the violation"); if(!picked.length) miss.push("at least one specific provision"); if(!F.date) miss.push("when it was observed"); if(!F.observed) miss.push("confirmation that you observed it");
+    const need=$("#need"); need.textContent="";
+    if(miss.length){ const u=el("ul"); miss.forEach(x=>u.append(el("li",{text:x}))); need.append(el("div",{class:"need"},"The Enforcement Policy requires these, and they are still missing:",u)); }
+    else need.append(el("div",{class:"ok",text:"This letter includes everything the Enforcement Policy requires of a written complaint."}));
+    const txt=letter(); $("#letter").textContent=txt;
+    const mail=$("#mail"); const subj="Written complaint: alleged covenant or rule violation"+(F.where?" at "+F.where:"");
+    mail.href="mailto:"+encodeURIComponent(F.toEmail.trim())+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(txt.slice(0,6000));
+    $("#mailnote").textContent=F.toEmail.trim()? "Opens a draft to "+F.toEmail.trim()+". If nothing opens, copy the letter and paste it into an email." : "If the email link does not open, copy the letter instead.";
+  }
+  function letter(){
+    const C=SITE.complaint, L=[]; const today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+    const when = F.date? new Date(F.date+"T12:00:00").toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+(F.time.trim()?" ("+F.time.trim()+")":"") : "[date observed]";
+    L.push(today,"", F.toName.trim()||C.recipientName, C.recipientOrg); if(C.recipientAddress) L.push(C.recipientAddress); if(F.toEmail.trim()) L.push(F.toEmail.trim());
+    L.push("","Re: Written complaint of an alleged covenant or rule violation","", "To the "+(F.toName.trim()||C.recipientName)+":","");
+    L.push("I am submitting this written complaint under Paragraphs 1 and 2 of the Association's Covenant and Rule Enforcement Policy.","");
+    L.push("Complainant: "+(F.name.trim()||"[your name]")+(F.addr.trim()?", "+F.addr.trim():"")+(F.contact.trim()?" ("+F.contact.trim()+")":""));
+    L.push("Alleged violator: "+(F.violator.trim()||"Not known to me"));
+    L.push("Location of the violation: "+(F.where.trim()||"[address or location]"));
+    L.push("Observed: "+when+(F.observed?". I personally observed the violation.":""),"");
+    L.push("Description of the alleged violation:", F.desc.trim()||"[describe what you observed]","");
+    L.push("Provisions alleged to have been violated:");
+    if(!picked.length) L.push("[add the specific provisions]");
+    picked.forEach((id,i)=>{ const r=BYID[id]; if(!r) return; L.push((i+1)+". "+cite(r.d,r.s)); const base=SITE.publicUrl||(/^https?:/.test(location.protocol)?location.href.split("#")[0]:""); if(base) L.push("   "+base+"#"+id);
+      if(F.quote){ let t=r.s.blocks.filter(b=>b.k==="p"||b.k==="li").map(b=>(b.m&&b.k==="li"?b.m+" ":"")+b.x).join(" "); if(t.length>900) t=t.slice(0,900).replace(/\s\S*$/,"")+" […]"; L.push('   "'+t+'"'); } });
+    L.push(""); if(F.other.trim()) L.push("Other pertinent information:",F.other.trim(),"");
+    L.push("I ask that the Association investigate this complaint and enforce the provisions above as its governing documents provide. I am available to provide further information.","", "Sincerely,","", F.name.trim()||"[your name]"); if(F.addr.trim()) L.push(F.addr.trim()); if(F.contact.trim()) L.push(F.contact.trim());
+    return L.join("\n");
+  }
+  drawPicked(); draw(); m.scrollTop=0;
+}
+boot();
+</script>
+</body>
+</html>
